@@ -1,82 +1,79 @@
 import {
   Container,
   Typography,
-  List,
-  ListItem,
-  Paper,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  Card,
+  CardContent,
+  Box,
+  TextField,
+  Divider,
 } from "@mui/material";
+import { Spa, CalendarMonth } from "@mui/icons-material";
 import { useState } from "react";
 
-const crops = [
-  {
-    id: 1,
-    name: "Carrot",
-    pricePerKg: 50,
-    growingPeriodDays: 70,
-  },
-  {
-    id: 2,
-    name: "Potato",
-    pricePerKg: 40,
-    growingPeriodDays: 90,
-  },
-  {
-    id: 3,
-    name: "Corn",
-    pricePerKg: 45,
-    growingPeriodDays: 80,
-  },
-];
-
 const App = () => {
-  const [selectedCrop, setSelectedCrop] = useState("");
+  const [quantity, setQuantity] = useState("");
 
-  const handleCropChange = (event) => {
-    setSelectedCrop(event.target.value);
+  const handleQuantityChange = (value) => {
+    if (value === "" || value >= 0) {
+      setQuantity(value);
+    }
+  };
+
+  const calculateHarvestDate = (days) => {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
   };
 
   return (
     <Container maxWidth="sm" className="mt-8">
-      <Typography variant="h4" component="h1" className="mb-4">
+      <Typography variant="h4" component="h1" className="mb-6 text-center">
         Jordnara Farm Orders
       </Typography>
 
-      <Paper elevation={2} className="p-4 mb-4">
-        <Typography variant="h6" className="mb-4">
-          Select Your Crop
-        </Typography>
+      <Card className="max-w-sm mx-auto">
+        <CardContent className="flex flex-col gap-4">
+          {/* Icon and Title Section */}
+          <Box className="text-center">
+            <Box className="flex justify-center mb-2">
+              <Spa sx={{ fontSize: 80, color: "primary.main" }} />
+            </Box>
+            <Typography variant="h5" className="font-medium">
+              Carrot
+            </Typography>
+          </Box>
 
-        <FormControl fullWidth>
-          <InputLabel>Crop</InputLabel>
-          <Select value={selectedCrop} label="Crop" onChange={handleCropChange}>
-            {crops.map((crop) => (
-              <MenuItem key={crop.id} value={crop.id}>
-                {crop.name} - ${crop.pricePerKg}/kg
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Paper>
+          <Divider />
 
-      <Paper elevation={2} className="p-4">
-        <Typography variant="h6" className="mb-2">
-          Available Crops
-        </Typography>
-        <List>
-          {crops.map((crop) => (
-            <ListItem key={crop.id}>
-              <Typography>
-                {crop.name} - ${crop.pricePerKg}/kg (Grows in{" "}
-                {crop.growingPeriodDays} days)
+          {/* Price and Harvest Info Section */}
+          <Box className="text-center">
+            <Typography variant="h6" color="primary" className="mb-1">
+              $50/kg
+            </Typography>
+            <Box className="flex items-center justify-center gap-1 text-gray-600">
+              <CalendarMonth fontSize="small" />
+              <Typography variant="body1">
+                Ready by {calculateHarvestDate(70)}
               </Typography>
-            </ListItem>
-          ))}
-        </List>
-      </Paper>
+            </Box>
+          </Box>
+
+          {/* Quantity Input Section */}
+          <TextField
+            label="Quantity (kg)"
+            type="number"
+            value={quantity}
+            onChange={(e) => handleQuantityChange(e.target.value)}
+            inputProps={{ min: 0 }}
+            size="small"
+            fullWidth
+          />
+        </CardContent>
+      </Card>
     </Container>
   );
 };
