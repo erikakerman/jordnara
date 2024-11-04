@@ -1,7 +1,6 @@
 import { Box, Paper, Typography, Divider } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import PropTypes from "prop-types";
-import { getShortHarvestDate } from "../../utils/dateUtils";
 
 function CartSummary({ quantities, crops }) {
   const calculateTotal = () => {
@@ -26,7 +25,7 @@ function CartSummary({ quantities, crops }) {
     <Paper elevation={3} className="p-4 mt-6">
       <Box className="flex items-center gap-2 mb-4">
         <ShoppingCart color="primary" />
-        <Typography variant="h6">Order Summary</Typography>
+        <Typography variant="h6">Request Summary</Typography>
       </Box>
 
       {selectedCrops.map((crop) => (
@@ -38,8 +37,11 @@ function CartSummary({ quantities, crops }) {
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary">
-            {crop.quantity}kg - Ready by{" "}
-            {getShortHarvestDate(crop.growingPeriodDays)}
+            {crop.quantity}kg - Typical growing period: {crop.growingPeriodDays}{" "}
+            days
+          </Typography>
+          <Typography variant="body2" color="text.secondary" className="italic">
+            * Final harvest date will be confirmed by farmer
           </Typography>
           <Divider className="mt-2" />
         </Box>

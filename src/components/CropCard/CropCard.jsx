@@ -6,15 +6,10 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import { CalendarMonth } from "@mui/icons-material";
+import { Schedule } from "@mui/icons-material";
 import PropTypes from "prop-types";
-import { calculateHarvestDate } from "../../utils/dateUtils";
 
-function CropCard({
-  crop,
-  quantity = "", // Default value moved here
-  onQuantityChange,
-}) {
+function CropCard({ crop, quantity = "", onQuantityChange }) {
   return (
     <Card className="h-full">
       <CardContent className="flex flex-col gap-4">
@@ -34,9 +29,9 @@ function CropCard({
             ${crop.pricePerKg}/kg
           </Typography>
           <Box className="flex items-center justify-center gap-1 text-gray-600">
-            <CalendarMonth fontSize="small" />
+            <Schedule fontSize="small" />
             <Typography variant="body1">
-              Ready by {calculateHarvestDate(crop.growingPeriodDays)}
+              Growing period: {crop.growingPeriodDays} days
             </Typography>
           </Box>
         </Box>
