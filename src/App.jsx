@@ -1,15 +1,12 @@
-import { Button, Box } from "@mui/material";
+import { Grid, Divider } from "@mui/material";
 import { useState } from "react";
 import Layout from "./components/Layout/Layout";
-import CropGrid from "./components/CropGrid";
+import CustomerView from "./components/CustomerView";
 import FarmerDashboard from "./components/FarmerDashboard";
-import OrderStatus from "./components/OrderStatus";
 import { crops } from "./data/crops";
 
 function App() {
   const [quantities, setQuantities] = useState({});
-  const [view, setView] = useState("order");
-  const [currentOrder, setCurrentOrder] = useState(null);
   const [orders, setOrders] = useState([]);
 
   const handleSubmitRequest = () => {
@@ -25,65 +22,53 @@ function App() {
         })),
     };
     setOrders([...orders, newOrder]);
-    setCurrentOrder(newOrder);
     setQuantities({});
   };
 
-  if (view === "farmer") {
-    return (
-      <Layout>
-        <FarmerDashboard
-          orders={orders}
-          onAcceptCrop={(orderId, cropId) => {
-            setOrders(
-              orders.map((order) =>
-                order.id === orderId
+  const handleAcceptCrop = (orderId, cropId) => {
+    setOrders(
+      orders.map((order) =>
+        order.id === orderId
+          ? {
+              ...order,
+              crops: order.crops.map((crop) =>
+                crop.id === cropId
                   ? {
-                      ...order,
-                      crops: order.crops.map((crop) =>
-                        crop.id === cropId
-                          ? {
-                              ...crop,
-                              status: "accepted",
-                              harvestDate: new Date(
-                                Date.now() +
-                                  crop.growingPeriodDays * 24 * 60 * 60 * 1000
-                              ).toISOString(),
-                            }
-                          : crop
-                      ),
+                      ...crop,
+                      status: "accepted",
+                      harvestDate: new Date(
+                        Date.now() +
+                          crop.growingPeriodDays * 24 * 60 * 60 * 1000
+                      ).toISOString(),
                     }
-                  : order
-              )
-            );
-          }}
-          onBack={() => setView("order")}
-        />
-      </Layout>
+                  : crop
+              ),
+            }
+          : order
+      )
     );
-  }
+  };
 
   return (
     <Layout>
-      <Box className="flex justify-end mb-4">
-        <Button variant="outlined" onClick={() => setView("farmer")}>
-          Switch to Farmer View
-        </Button>
-      </Box>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={6}>
+          <CustomerView
+            quantities={quantities}
+            onQuantitiesChange={setQuantities}
+            onSubmitRequest={handleSubmitRequest}
+            orders={orders}
+          />
+        </Grid>
 
-      <CropGrid quantities={quantities} onQuantitiesChange={setQuantities} />
+        <Grid item xs={12} md="auto">
+          <Divider orientation="vertical" />
+        </Grid>
 
-      <Box className="flex justify-center mt-6">
-        <Button
-          variant="contained"
-          onClick={handleSubmitRequest}
-          disabled={Object.values(quantities).every((q) => !q)}
-        >
-          Submit Request
-        </Button>
-      </Box>
-
-      {currentOrder && <OrderStatus order={currentOrder} />}
+        <Grid item xs={12} md={5}>
+          <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />
+        </Grid>
+      </Grid>
     </Layout>
   );
 }
