@@ -1,4 +1,4 @@
-import { Grid, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import { useState } from "react";
 import Layout from "./components/Layout/Layout";
 import CustomerView from "./components/CustomerView";
@@ -51,24 +51,54 @@ function App() {
 
   return (
     <Layout>
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <CustomerView
-            quantities={quantities}
-            onQuantitiesChange={setQuantities}
-            onSubmitRequest={handleSubmitRequest}
-            orders={orders}
+      <Box
+        sx={{
+          bgcolor: "yellow", // Debug color
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            bgcolor: "pink", // Debug color
+            width: "100%",
+            maxWidth: "1600px",
+            display: "flex",
+            gap: 4,
+          }}
+        >
+          <Box
+            sx={{
+              flex: 1,
+              bgcolor: "lightblue", // Debug color
+            }}
+          >
+            <CustomerView
+              quantities={quantities}
+              onQuantitiesChange={setQuantities}
+              onSubmitRequest={handleSubmitRequest}
+              orders={orders}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              width: "1px",
+              bgcolor: "divider",
+            }}
           />
-        </Grid>
 
-        <Grid item xs={12} md="auto">
-          <Divider orientation="vertical" />
-        </Grid>
-
-        <Grid item xs={12} md={5}>
-          <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />
-        </Grid>
-      </Grid>
+          <Box
+            sx={{
+              flex: 1,
+              bgcolor: "lightgreen", // Debug color
+            }}
+          >
+            <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />
+          </Box>
+        </Box>
+      </Box>
     </Layout>
   );
 }

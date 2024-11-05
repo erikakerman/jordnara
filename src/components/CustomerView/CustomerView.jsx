@@ -10,13 +10,29 @@ function CustomerView({
   orders,
 }) {
   return (
-    <>
-      <CropGrid
-        quantities={quantities}
-        onQuantitiesChange={onQuantitiesChange}
-      />
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box sx={{ width: "100%" }}>
+        <CropGrid
+          quantities={quantities}
+          onQuantitiesChange={onQuantitiesChange}
+        />
+      </Box>
 
-      <Box className="flex justify-center mt-6">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 6,
+          width: "100%",
+        }}
+      >
         <Button
           variant="contained"
           onClick={onSubmitRequest}
@@ -27,8 +43,8 @@ function CustomerView({
       </Box>
 
       {orders.length > 0 && (
-        <Box className="mt-8">
-          <Typography variant="h6" className="mb-4">
+        <Box sx={{ mt: 8, width: "100%" }}>
+          <Typography variant="h6" sx={{ mb: 4 }}>
             Your Orders
           </Typography>
           {orders.map((order) => (
@@ -36,7 +52,7 @@ function CustomerView({
           ))}
         </Box>
       )}
-    </>
+    </Box>
   );
 }
 

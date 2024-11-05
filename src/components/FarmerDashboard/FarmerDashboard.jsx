@@ -14,8 +14,15 @@ import PropTypes from "prop-types";
 
 function FarmerDashboard({ orders, onAcceptCrop, onBack }) {
   return (
-    <Box>
-      <Box className="flex items-center gap-2 mb-4">
+    <Box sx={{ width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          mb: 4,
+        }}
+      >
         <IconButton onClick={onBack} size="small">
           <ArrowBack />
         </IconButton>
@@ -23,25 +30,47 @@ function FarmerDashboard({ orders, onAcceptCrop, onBack }) {
       </Box>
 
       {orders.length === 0 ? (
-        <Typography className="text-center mt-8 text-gray-600">
+        <Typography
+          sx={{
+            textAlign: "center",
+            mt: 8,
+            color: "text.secondary",
+          }}
+        >
           No orders to review yet
         </Typography>
       ) : (
         orders.map((order) => (
-          <Card key={order.id} className="mb-4">
+          <Card key={order.id} sx={{ mb: 4, width: "100%" }}>
             <CardContent>
-              <Typography variant="h6" className="mb-2">
+              <Typography variant="h6" sx={{ mb: 2 }}>
                 Order #{order.id.slice(-4)}
               </Typography>
-              <Typography className="mb-2" color="text.secondary">
+              <Typography sx={{ mb: 2 }} color="text.secondary">
                 {format(new Date(order.submittedAt), "PPpp")}
               </Typography>
 
-              <Divider className="my-3" />
+              <Divider sx={{ my: 3 }} />
 
               {order.crops.map((crop) => (
-                <Box key={crop.id} className="mb-3 p-3 bg-gray-50 rounded">
-                  <Box className="flex justify-between items-center">
+                <Box
+                  key={crop.id}
+                  sx={{
+                    mb: 3,
+                    p: 3,
+                    bgcolor: "grey.50",
+                    borderRadius: 1,
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
                     <Box>
                       <Typography variant="subtitle1">
                         {crop.name} - {crop.quantity}kg
