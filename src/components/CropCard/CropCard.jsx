@@ -5,42 +5,105 @@ import {
   TextField,
   Divider,
   Typography,
+  CardMedia,
 } from "@mui/material";
 import { Schedule } from "@mui/icons-material";
 import PropTypes from "prop-types";
 
 function CropCard({ crop, quantity = "", onQuantityChange }) {
   return (
-    <Card sx={{ width: "100%", height: "100%" }}>
+    <Card
+      sx={{
+        width: "100%",
+        height: "100%",
+        transition: "all 0.3s ease",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: 4,
+        },
+        borderRadius: 2,
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box
+        sx={{ position: "relative", paddingTop: "75%" /* 4:3 aspect ratio */ }}
+      >
+        <CardMedia
+          component="img"
+          image={crop.image}
+          alt={crop.name}
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "contain", // Changed to contain to show full image
+            objectPosition: "center",
+            bgcolor: "background.paper",
+            p: 1, // Add some padding around the image
+          }}
+        />
+      </Box>
+
+      {/* Rest of the card content remains the same */}
       <CardContent
         sx={{
           display: "flex",
           flexDirection: "column",
+          flex: 1,
+          padding: 3,
           gap: 2,
-          height: "100%",
+          "&:last-child": {
+            paddingBottom: 3,
+          },
         }}
       >
-        <Box sx={{ textAlign: "center" }}>
-          <Box
+        <Box
+          sx={{
+            textAlign: "center",
+            mb: 1,
+          }}
+        >
+          <Typography
+            variant="h6"
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              mb: 2,
+              fontWeight: 600,
+              color: "text.primary",
             }}
           >
-            <crop.Icon sx={{ fontSize: 80, color: "primary.main" }} />
-          </Box>
-          <Typography variant="h5" sx={{ fontWeight: 500 }}>
             {crop.name}
           </Typography>
         </Box>
 
-        <Divider />
+        <Divider sx={{ opacity: 0.6 }} />
 
         <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h6" color="primary" sx={{ mb: 1 }}>
-            ${crop.pricePerKg}/kg
+          <Typography
+            variant="h5"
+            color="primary"
+            sx={{
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 0.5,
+            }}
+          >
+            {crop.pricePerKg}
+            <Typography
+              component="span"
+              sx={{
+                fontSize: "0.9rem",
+                color: "text.secondary",
+              }}
+            >
+              /kg
+            </Typography>
           </Typography>
+
           <Box
             sx={{
               display: "flex",
@@ -48,11 +111,19 @@ function CropCard({ crop, quantity = "", onQuantityChange }) {
               justifyContent: "center",
               gap: 1,
               color: "text.secondary",
+              bgcolor: "grey.50",
+              borderRadius: 1,
+              padding: "4px 8px",
+              mt: 1,
             }}
           >
-            <Schedule fontSize="small" />
-            <Typography variant="body1">
-              Growing period: {crop.growingPeriodDays} days
+            <Schedule
+              fontSize="small"
+              color="primary"
+              sx={{ fontSize: "1rem" }}
+            />
+            <Typography variant="body2" sx={{ fontSize: "0.875rem" }}>
+              {crop.growingPeriodDays} days
             </Typography>
           </Box>
         </Box>
@@ -62,9 +133,24 @@ function CropCard({ crop, quantity = "", onQuantityChange }) {
           type="number"
           value={quantity}
           onChange={(e) => onQuantityChange(crop.id, e.target.value)}
-          inputProps={{ min: 0 }}
+          inputProps={{
+            min: 0,
+            sx: {
+              textAlign: "center",
+              padding: "8px 12px",
+            },
+          }}
           size="small"
           fullWidth
+          sx={{
+            mt: "auto",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: 1,
+              "&:hover fieldset": {
+                borderColor: "primary.main",
+              },
+            },
+          }}
         />
       </CardContent>
     </Card>
@@ -77,7 +163,7 @@ CropCard.propTypes = {
     name: PropTypes.string.isRequired,
     pricePerKg: PropTypes.number.isRequired,
     growingPeriodDays: PropTypes.number.isRequired,
-    Icon: PropTypes.elementType.isRequired,
+    image: PropTypes.string.isRequired,
   }).isRequired,
   quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onQuantityChange: PropTypes.func.isRequired,

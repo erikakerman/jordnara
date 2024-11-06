@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Container } from "@mui/material";
 import PropTypes from "prop-types";
 import CropGrid from "../CropGrid";
 import OrderStatus from "../OrderStatus";
@@ -10,61 +10,103 @@ function CustomerView({
   orders,
 }) {
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: 600,
-          marginBottom: 3,
-          color: "text.primary",
-          padding: "24px 24px 0 24px",
-        }}
-      >
-        Customer View
-      </Typography>
-
-      <Box sx={{ width: "100%" }}>
-        <CropGrid
-          quantities={quantities}
-          onQuantitiesChange={onQuantitiesChange}
-        />
-      </Box>
-
+    <Container maxWidth="xl">
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          mt: 6,
           width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: 4,
         }}
       >
-        <Button
-          variant="contained"
-          onClick={onSubmitRequest}
-          disabled={Object.values(quantities).every((q) => !q)}
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 700,
+            color: "text.primary",
+            textAlign: { xs: "center", md: "left" },
+            position: "relative",
+            "&::after": {
+              content: '""',
+              position: "absolute",
+              bottom: -8,
+              left: { xs: "50%", md: 0 },
+              transform: { xs: "translateX(-50%)", md: "none" },
+              width: 60,
+              height: 3,
+              bgcolor: "primary.main",
+              borderRadius: 1,
+            },
+          }}
         >
-          Submit Request
-        </Button>
-      </Box>
+          Customer View
+        </Typography>
 
-      {orders.length > 0 && (
-        <Box sx={{ mt: 8, width: "100%" }}>
-          <Typography variant="h6" sx={{ mb: 4 }}>
-            Your Orders
-          </Typography>
-          {orders.map((order) => (
-            <OrderStatus key={order.id} order={order} />
-          ))}
+        <Box sx={{ width: "100%" }}>
+          <CropGrid
+            quantities={quantities}
+            onQuantitiesChange={onQuantitiesChange}
+          />
         </Box>
-      )}
-    </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 4,
+            width: "100%",
+          }}
+        >
+          <Button
+            variant="contained"
+            onClick={onSubmitRequest}
+            disabled={Object.values(quantities).every((q) => !q)}
+            sx={{
+              px: 6,
+              py: 1.5,
+              borderRadius: 2,
+              textTransform: "none",
+              fontSize: "1.1rem",
+              fontWeight: 600,
+              boxShadow: 2,
+              "&:hover": {
+                boxShadow: 4,
+              },
+            }}
+          >
+            Submit Request
+          </Button>
+        </Box>
+
+        {orders.length > 0 && (
+          <Box
+            sx={{
+              mt: 6,
+              width: "100%",
+              bgcolor: "background.paper",
+              borderRadius: 2,
+              p: 4,
+              boxShadow: 1,
+            }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 4,
+                fontWeight: 600,
+                color: "text.primary",
+              }}
+            >
+              Your Orders
+            </Typography>
+            {orders.map((order) => (
+              <OrderStatus key={order.id} order={order} />
+            ))}
+          </Box>
+        )}
+      </Box>
+    </Container>
   );
 }
 

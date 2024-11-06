@@ -18,7 +18,7 @@ function CropGrid({ quantities, onQuantitiesChange }) {
     <Box sx={{ width: "100%" }}>
       <Grid
         container
-        spacing={3}
+        spacing={4}
         sx={{
           width: "100%",
           margin: 0,
