@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import farmBackground from "../../assets/farm.jpg";
 
 function Layout({ children }) {
   return (
@@ -11,20 +12,18 @@ function Layout({ children }) {
         flexDirection: "column",
         width: "100vw",
         overflowX: "hidden",
-        bgcolor: "grey.50", // Light gray background for the entire app
+        bgcolor: "grey.50",
       }}
     >
       {/* Enhanced Hero Section */}
       <Box
         sx={{
           width: "100%",
-          minHeight: "45vh", // Increased height
+          minHeight: "45vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(145deg, #f5f9ff 0%, #ffffff 100%)", // Subtle gradient
-          padding: { xs: 4, md: 8 }, // Responsive padding
           position: "relative",
           "&::before": {
             content: '""',
@@ -33,10 +32,21 @@ function Layout({ children }) {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage:
-              "radial-gradient(circle at 25px 25px, #f0f0f0 2%, transparent 0%)",
-            backgroundSize: "50px 50px",
-            opacity: 0.4,
+            backgroundImage: `url(${farmBackground})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            zIndex: 0,
+          },
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay
+            zIndex: 1,
           },
         }}
       >
@@ -45,8 +55,9 @@ function Layout({ children }) {
             maxWidth: "800px",
             width: "100%",
             textAlign: "center",
-            position: "relative", // To appear above the pattern
-            zIndex: 1,
+            position: "relative",
+            zIndex: 2, // Place text above the overlay
+            padding: { xs: 4, md: 8 },
           }}
         >
           <Typography
@@ -55,11 +66,8 @@ function Layout({ children }) {
             sx={{
               fontWeight: 800,
               marginBottom: 3,
-              background: "linear-gradient(45deg, #1976d2, #2196f3)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              textShadow: "0px 2px 5px rgba(0,0,0,0.1)",
+              color: "white",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
             }}
           >
             From Farm to Table, Simplified
@@ -68,12 +76,13 @@ function Layout({ children }) {
           <Typography
             variant="h5"
             component="p"
-            color="text.secondary"
             sx={{
+              color: "grey.100",
               lineHeight: 1.6,
               maxWidth: "600px",
               margin: "0 auto",
               fontWeight: 400,
+              textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
             }}
           >
             Connect directly with local farmers and pre-order fresh, seasonal

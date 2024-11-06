@@ -27,9 +27,7 @@ function CropCard({ crop, quantity = "", onQuantityChange }) {
         flexDirection: "column",
       }}
     >
-      <Box
-        sx={{ position: "relative", paddingTop: "75%" /* 4:3 aspect ratio */ }}
-      >
+      <Box sx={{ position: "relative", paddingTop: "75%" }}>
         <CardMedia
           component="img"
           image={crop.image}
@@ -40,15 +38,14 @@ function CropCard({ crop, quantity = "", onQuantityChange }) {
             left: 0,
             width: "100%",
             height: "100%",
-            objectFit: "contain", // Changed to contain to show full image
+            objectFit: "contain",
             objectPosition: "center",
             bgcolor: "background.paper",
-            p: 1, // Add some padding around the image
+            p: 1,
           }}
         />
       </Box>
 
-      {/* Rest of the card content remains the same */}
       <CardContent
         sx={{
           display: "flex",
@@ -100,7 +97,7 @@ function CropCard({ crop, quantity = "", onQuantityChange }) {
                 color: "text.secondary",
               }}
             >
-              /kg
+              kr/kg
             </Typography>
           </Typography>
 
@@ -123,13 +120,13 @@ function CropCard({ crop, quantity = "", onQuantityChange }) {
               sx={{ fontSize: "1rem" }}
             />
             <Typography variant="body2" sx={{ fontSize: "0.875rem" }}>
-              {crop.growingPeriodDays} days
+              {crop.growingPeriodDays}
             </Typography>
           </Box>
         </Box>
 
         <TextField
-          label="Quantity (kg)"
+          label="kg"
           type="number"
           value={quantity}
           onChange={(e) => onQuantityChange(crop.id, e.target.value)}

@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { useState } from "react";
 import Layout from "./components/Layout/Layout";
 import CustomerView from "./components/CustomerView";
@@ -57,6 +57,7 @@ function App() {
           display: "flex",
           justifyContent: "center",
           bgcolor: "background.default",
+          py: 2,
         }}
       >
         <Box
@@ -65,7 +66,7 @@ function App() {
             maxWidth: "1600px",
             display: "flex",
             gap: 4,
-            px: { xs: 2, sm: 4 }, // Add responsive padding
+            px: { xs: 2, sm: 4 },
           }}
         >
           <Box
@@ -73,6 +74,7 @@ function App() {
               flex: 1,
               borderRadius: 2,
               bgcolor: "background.paper",
+              boxShadow: "0 0 20px rgba(0,0,0,0.05)",
             }}
           >
             <CustomerView
@@ -83,10 +85,15 @@ function App() {
             />
           </Box>
 
-          <Box
+          <Divider
+            orientation="vertical"
+            flexItem
             sx={{
-              width: "1px",
+              width: "2px",
               bgcolor: "divider",
+              boxShadow: "1px 0 8px rgba(0,0,0,0.1)",
+              my: 4, // Add vertical margin
+              opacity: 0.7,
             }}
           />
 
@@ -95,6 +102,7 @@ function App() {
               flex: 1,
               borderRadius: 2,
               bgcolor: "background.paper",
+              boxShadow: "0 0 20px rgba(0,0,0,0.05)",
             }}
           >
             <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />

@@ -27,17 +27,6 @@ function CustomerView({
             color: "text.primary",
             textAlign: { xs: "center", md: "left" },
             position: "relative",
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              bottom: -8,
-              left: { xs: "50%", md: 0 },
-              transform: { xs: "translateX(-50%)", md: "none" },
-              width: 60,
-              height: 3,
-              bgcolor: "primary.main",
-              borderRadius: 1,
-            },
           }}
         >
           Customer View
@@ -50,6 +39,7 @@ function CustomerView({
           />
         </Box>
 
+        {/* Rest of the component remains the same */}
         <Box
           sx={{
             display: "flex",
