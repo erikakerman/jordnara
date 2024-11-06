@@ -6,28 +6,32 @@ import {
   Button,
   Chip,
   Divider,
-  IconButton,
 } from "@mui/material";
-import { ArrowBack, AccessTime } from "@mui/icons-material";
+import { AccessTime } from "@mui/icons-material";
 import { format } from "date-fns";
 import PropTypes from "prop-types";
 
-function FarmerDashboard({ orders, onAcceptCrop, onBack }) {
+function FarmerDashboard({ orders, onAcceptCrop }) {
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Typography
+        variant="h4"
         sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          mb: 4,
+          fontWeight: 600,
+          marginBottom: 3,
+          color: "text.primary",
+          padding: "24px 24px 0 24px",
         }}
       >
-        <IconButton onClick={onBack} size="small">
-          <ArrowBack />
-        </IconButton>
-        <Typography variant="h5">Farmer Dashboard</Typography>
-      </Box>
+        Farmer View
+      </Typography>
 
       {orders.length === 0 ? (
         <Typography
@@ -127,7 +131,6 @@ FarmerDashboard.propTypes = {
     })
   ).isRequired,
   onAcceptCrop: PropTypes.func.isRequired,
-  onBack: PropTypes.func.isRequired,
 };
 
 export default FarmerDashboard;

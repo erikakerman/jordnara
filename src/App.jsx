@@ -53,25 +53,26 @@ function App() {
     <Layout>
       <Box
         sx={{
-          bgcolor: "yellow", // Debug color
           width: "100%",
           display: "flex",
           justifyContent: "center",
+          bgcolor: "background.default",
         }}
       >
         <Box
           sx={{
-            bgcolor: "pink", // Debug color
             width: "100%",
             maxWidth: "1600px",
             display: "flex",
             gap: 4,
+            px: { xs: 2, sm: 4 }, // Add responsive padding
           }}
         >
           <Box
             sx={{
               flex: 1,
-              bgcolor: "lightblue", // Debug color
+              borderRadius: 2,
+              bgcolor: "background.paper",
             }}
           >
             <CustomerView
@@ -92,7 +93,8 @@ function App() {
           <Box
             sx={{
               flex: 1,
-              bgcolor: "lightgreen", // Debug color
+              borderRadius: 2,
+              bgcolor: "background.paper",
             }}
           >
             <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />

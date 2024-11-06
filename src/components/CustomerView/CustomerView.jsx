@@ -18,6 +18,18 @@ function CustomerView({
         flexDirection: "column",
       }}
     >
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: 600,
+          marginBottom: 3,
+          color: "text.primary",
+          padding: "24px 24px 0 24px",
+        }}
+      >
+        Customer View
+      </Typography>
+
       <Box sx={{ width: "100%" }}>
         <CropGrid
           quantities={quantities}
