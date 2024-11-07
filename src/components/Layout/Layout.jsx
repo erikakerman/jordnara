@@ -70,7 +70,7 @@ function Layout({ children }) {
               textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
             }}
           >
-            From Farm to Table, Simplified
+            Från din lokala odlare, till ditt matbord
           </Typography>
 
           <Typography
@@ -85,8 +85,8 @@ function Layout({ children }) {
               textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
             }}
           >
-            Connect directly with local farmers and pre-order fresh, seasonal
-            produce while supporting sustainable agriculture.
+            Från söta morötter till friska grönsaker, vi har allt du behöver för
+            att skapa en fantastisk måltid.
           </Typography>
         </Box>
       </Box>

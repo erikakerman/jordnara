@@ -1,5 +1,3 @@
-import { Spa, Grass, LocalFlorist, Agriculture } from '@mui/icons-material';
-
 // Import images
 import carrotImage from '../assets/carrot.jpg';
 import potatoImage from '../assets/potato.jpg';
@@ -11,50 +9,44 @@ import onionImage from '../assets/onion.jpg';
 export const crops = [
     {
         id: 1,
-        name: "Carrot",
-        pricePerKg: 50,
+        name: "Morot",
+        pricePerKg: 17,
         growingPeriodDays: 70,
-        Icon: Spa,
         image: carrotImage
     },
     {
         id: 2,
-        name: "Potato",
-        pricePerKg: 40,
+        name: "Potatis",
+        pricePerKg: 14,
         growingPeriodDays: 90,
-        Icon: Agriculture,
         image: potatoImage
     },
     {
         id: 3,
-        name: "Corn",
+        name: "Majs",
         pricePerKg: 45,
         growingPeriodDays: 80,
-        Icon: Grass,
         image: cornImage
     },
     {
         id: 4,
-        name: "Cabbage",
-        pricePerKg: 35,
+        name: "Kål",
+        pricePerKg: 11,
         growingPeriodDays: 65,
-        Icon: LocalFlorist,
         image: cabbageImage
     },
     {
         id: 5,
-        name: "Beetroot",
-        pricePerKg: 55,
+        name: "Rödbeta",
+        pricePerKg: 18,
         growingPeriodDays: 60,
-        Icon: Spa,
         image: beetrootImage
     },
     {
         id: 6,
-        name: "Onion",
-        pricePerKg: 30,
+        name: "Lök",
+        pricePerKg: 9,
         growingPeriodDays: 75,
-        Icon: LocalFlorist,
         image: onionImage
     }
 ];
