@@ -24,7 +24,7 @@ function CustomerView({
   };
 
   const statusBoxStyle = {
-    minWidth: "180px", // Fixed width for both harvest and pending status
+    minWidth: "180px",
     display: "inline-flex",
     justifyContent: "center",
   };
@@ -135,7 +135,9 @@ function CustomerView({
                         gap: 0.5,
                       }}
                     >
-                      Growing period: {crop.growingPeriodDays} days
+                      {crop.status === "accepted"
+                        ? `Odlingslott ${crop.plotNumber}`
+                        : `Growing period: ${crop.growingPeriodDays} days`}
                     </Typography>
                   </Box>
                   {crop.status === "accepted" ? (
@@ -198,6 +200,7 @@ CustomerView.propTypes = {
           pricePerKg: PropTypes.number.isRequired,
           harvestDate: PropTypes.string,
           growingPeriodDays: PropTypes.number.isRequired,
+          plotNumber: PropTypes.number,
         })
       ).isRequired,
     })

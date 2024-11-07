@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import { useState } from "react";
 import Layout from "./components/Layout/Layout";
 import CustomerView from "./components/CustomerView";
@@ -10,7 +10,6 @@ function App() {
   const [orders, setOrders] = useState([]);
 
   const generateOrderId = () => {
-    // Generate a random number between 1000 and 9999
     return Math.floor(1000 + Math.random() * 9000).toString();
   };
 
@@ -65,56 +64,44 @@ function App() {
           display: "flex",
           justifyContent: "center",
           bgcolor: "background.default",
-          py: 2,
+          py: 4,
+          px: { xs: 2, sm: 4 },
+          gap: 4,
         }}
       >
         <Box
           sx={{
-            width: "100%",
-            maxWidth: "1600px",
-            display: "flex",
-            gap: 4,
-            px: { xs: 2, sm: 4 },
+            flex: 1,
+            maxWidth: "800px",
+            borderRadius: 2,
+            bgcolor: "background.paper",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.1)",
+            border: "1px solid",
+            borderColor: "divider",
+            overflow: "hidden",
           }}
         >
-          <Box
-            sx={{
-              flex: 1,
-              borderRadius: 2,
-              bgcolor: "background.paper",
-              boxShadow: "0 0 20px rgba(0,0,0,0.05)",
-            }}
-          >
-            <CustomerView
-              quantities={quantities}
-              onQuantitiesChange={setQuantities}
-              onSubmitRequest={handleSubmitRequest}
-              orders={orders}
-            />
-          </Box>
-
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{
-              width: "2px",
-              bgcolor: "divider",
-              boxShadow: "1px 0 8px rgba(0,0,0,0.1)",
-              my: 4,
-              opacity: 0.7,
-            }}
+          <CustomerView
+            quantities={quantities}
+            onQuantitiesChange={setQuantities}
+            onSubmitRequest={handleSubmitRequest}
+            orders={orders}
           />
+        </Box>
 
-          <Box
-            sx={{
-              flex: 1,
-              borderRadius: 2,
-              bgcolor: "background.paper",
-              boxShadow: "0 0 20px rgba(0,0,0,0.05)",
-            }}
-          >
-            <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />
-          </Box>
+        <Box
+          sx={{
+            flex: 1,
+            maxWidth: "800px",
+            borderRadius: 2,
+            bgcolor: "background.paper",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.1)",
+            border: "1px solid",
+            borderColor: "divider",
+            overflow: "hidden",
+          }}
+        >
+          <FarmerDashboard orders={orders} onAcceptCrop={handleAcceptCrop} />
         </Box>
       </Box>
     </Layout>

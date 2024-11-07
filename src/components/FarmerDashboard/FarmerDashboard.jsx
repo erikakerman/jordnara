@@ -1,9 +1,17 @@
 import { Box, Typography, Button } from "@mui/material";
 import { Agriculture } from "@mui/icons-material";
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 
 function FarmerDashboard({ orders, onAcceptCrop }) {
+  const formatDate = (dateString) => {
+    return format(new Date(dateString), "MMM d, yyyy");
+  };
+
+  const getExpectedHarvestDate = (growingPeriodDays) => {
+    return formatDate(addDays(new Date(), growingPeriodDays));
+  };
+
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
@@ -76,7 +84,10 @@ function FarmerDashboard({ orders, onAcceptCrop }) {
                     mt: 0.5,
                   }}
                 >
-                  Growing period: {crop.growingPeriodDays} days
+                  Harvest:{" "}
+                  {crop.status === "accepted"
+                    ? formatDate(crop.harvestDate)
+                    : getExpectedHarvestDate(crop.growingPeriodDays)}
                 </Typography>
               </Box>
               {crop.status === "accepted" ? (
@@ -139,6 +150,7 @@ FarmerDashboard.propTypes = {
           pricePerKg: PropTypes.number.isRequired,
           growingPeriodDays: PropTypes.number.isRequired,
           plotNumber: PropTypes.number,
+          harvestDate: PropTypes.string,
         })
       ).isRequired,
     })
