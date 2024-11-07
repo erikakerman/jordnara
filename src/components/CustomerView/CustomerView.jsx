@@ -55,9 +55,6 @@ function CustomerView({
         </>
       ) : (
         <Box sx={{ mt: 2 }}>
-          <Typography variant="h5" sx={{ mb: 3 }}>
-            Your Orders
-          </Typography>
           {orders.map((order) => (
             <Box
               key={order.id}

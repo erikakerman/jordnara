@@ -9,9 +9,14 @@ function App() {
   const [quantities, setQuantities] = useState({});
   const [orders, setOrders] = useState([]);
 
+  const generateOrderId = () => {
+    // Generate a random number between 1000 and 9999
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  };
+
   const handleSubmitRequest = () => {
     const newOrder = {
-      id: Date.now().toString(),
+      id: generateOrderId(),
       submittedAt: new Date().toISOString(),
       crops: Object.entries(quantities)
         .filter(([, quantity]) => quantity > 0)
@@ -26,6 +31,8 @@ function App() {
   };
 
   const handleAcceptCrop = (orderId, cropId) => {
+    const plotNumber = Math.floor(Math.random() * 20) + 1;
+
     setOrders(
       orders.map((order) =>
         order.id === orderId
@@ -40,6 +47,7 @@ function App() {
                         Date.now() +
                           crop.growingPeriodDays * 24 * 60 * 60 * 1000
                       ).toISOString(),
+                      plotNumber: plotNumber,
                     }
                   : crop
               ),
@@ -92,7 +100,7 @@ function App() {
               width: "2px",
               bgcolor: "divider",
               boxShadow: "1px 0 8px rgba(0,0,0,0.1)",
-              my: 4, // Add vertical margin
+              my: 4,
               opacity: 0.7,
             }}
           />

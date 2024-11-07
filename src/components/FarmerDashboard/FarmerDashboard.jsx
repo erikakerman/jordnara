@@ -1,13 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
-import { Schedule } from "@mui/icons-material";
+import { Agriculture } from "@mui/icons-material";
 import PropTypes from "prop-types";
 import { format } from "date-fns";
 
 function FarmerDashboard({ orders, onAcceptCrop }) {
-  const formatDate = (dateString) => {
-    return format(new Date(dateString), "MMM d, yyyy");
-  };
-
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
@@ -39,7 +35,7 @@ function FarmerDashboard({ orders, onAcceptCrop }) {
                 fontWeight: 500,
               }}
             >
-              Order #{order.id.split("-").pop()}
+              Order #{order.id}
             </Typography>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
               {format(new Date(order.submittedAt), "MMM d, yyyy, h:mm:ss a")}
@@ -70,6 +66,16 @@ function FarmerDashboard({ orders, onAcceptCrop }) {
                     mt: 0.5,
                   }}
                 >
+                  {crop.pricePerKg} kr/kg · Total:{" "}
+                  {crop.pricePerKg * crop.quantity} kr
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "text.secondary",
+                    mt: 0.5,
+                  }}
+                >
                   Growing period: {crop.growingPeriodDays} days
                 </Typography>
               </Box>
@@ -79,16 +85,16 @@ function FarmerDashboard({ orders, onAcceptCrop }) {
                     display: "flex",
                     alignItems: "center",
                     gap: 1,
-                    bgcolor: "success.main",
+                    bgcolor: "primary.main",
                     color: "white",
                     px: 2,
                     py: 1,
                     borderRadius: 2,
                   }}
                 >
-                  <Schedule sx={{ fontSize: "1rem" }} />
+                  <Agriculture sx={{ fontSize: "1rem" }} />
                   <Typography sx={{ fontSize: "0.875rem" }}>
-                    Harvest: {formatDate(crop.harvestDate)}
+                    Odlingslott {crop.plotNumber}
                   </Typography>
                 </Box>
               ) : (
@@ -104,7 +110,7 @@ function FarmerDashboard({ orders, onAcceptCrop }) {
                     },
                   }}
                 >
-                  Accept Crop
+                  Acceptera
                 </Button>
               )}
             </Box>
@@ -126,8 +132,9 @@ FarmerDashboard.propTypes = {
           name: PropTypes.string.isRequired,
           quantity: PropTypes.number.isRequired,
           status: PropTypes.string.isRequired,
+          pricePerKg: PropTypes.number.isRequired,
           growingPeriodDays: PropTypes.number.isRequired,
-          harvestDate: PropTypes.string,
+          plotNumber: PropTypes.number,
         })
       ).isRequired,
     })
