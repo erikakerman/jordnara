@@ -102,15 +102,19 @@ function FarmerDashboard({ orders, onAcceptCrop }) {
                   variant="contained"
                   onClick={() => onAcceptCrop(order.id, crop.id)}
                   sx={{
+                    width: "140px",
                     textTransform: "none",
-                    px: 3,
-                    bgcolor: "primary.main",
+                    boxShadow: "none",
+                    px: 2,
+                    py: 1,
+                    fontSize: "0.875rem",
                     "&:hover": {
                       bgcolor: "primary.dark",
+                      boxShadow: "none",
                     },
                   }}
                 >
-                  Acceptera
+                  Accept Crop
                 </Button>
               )}
             </Box>

@@ -23,6 +23,12 @@ function CustomerView({
     );
   };
 
+  const statusBoxStyle = {
+    minWidth: "180px", // Fixed width for both harvest and pending status
+    display: "inline-flex",
+    justifyContent: "center",
+  };
+
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
@@ -135,14 +141,13 @@ function CustomerView({
                   {crop.status === "accepted" ? (
                     <Box
                       sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1,
+                        ...statusBoxStyle,
                         bgcolor: "success.main",
                         color: "white",
                         px: 2,
                         py: 1,
                         borderRadius: 2,
+                        gap: 1,
                       }}
                     >
                       <Schedule sx={{ fontSize: "1rem" }} />
@@ -153,6 +158,7 @@ function CustomerView({
                   ) : (
                     <Typography
                       sx={{
+                        ...statusBoxStyle,
                         px: 2,
                         py: 1,
                         borderRadius: 1,
